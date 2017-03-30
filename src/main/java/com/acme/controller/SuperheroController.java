@@ -3,6 +3,7 @@ package com.acme.controller;
 import com.acme.domain.Superhero;
 import com.acme.repository.SuperheroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -24,6 +25,7 @@ public class SuperheroController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Superhero save(@RequestBody Superhero superhero) {
         return superheroRepository.save(superhero);
     }
