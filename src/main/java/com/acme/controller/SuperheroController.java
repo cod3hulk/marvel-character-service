@@ -1,6 +1,7 @@
 package com.acme.controller;
 
 import com.acme.domain.Superhero;
+import com.acme.exception.ResourceNotFoundException;
 import com.acme.repository.SuperheroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,8 @@ public class SuperheroController {
 
     @GetMapping("/{id}")
     public Superhero get(@PathVariable("id") Long id) {
-        return superheroRepository.findOne(id);
+        return superheroRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     @GetMapping
